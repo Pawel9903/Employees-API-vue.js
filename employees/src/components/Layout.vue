@@ -1,11 +1,13 @@
 <template>
-  <div id="app">
-    <h2>Katalog pracowników</h2>
-    <NavMenu></NavMenu>
+  <b-container>
+    <div id="app">
+      <h2>Katalog pracowników</h2>
+      <NavMenu></NavMenu>
 
-    <router-view></router-view>
+      <router-view></router-view>
 
-  </div>
+    </div>
+  </b-container>
 </template>
 
 <script>

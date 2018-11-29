@@ -77,12 +77,21 @@
 </template>
 
 <script>
+  import axios from 'axios';
+
   export default {
     name: "EditEmployee",
     data () {
       return {
         employee: this.$route.params.employee.item,
+        headers: {
+          headers: {
+            'Content-Type': 'application/json'
+            }
+          },
+        data: '',
         form: {
+          id: this.$route.params.employee.item.id,
           email: '',
           name: '',
           surname: '',
@@ -104,11 +113,16 @@
       this.form.phone = this.employee.phone;
       this.form.city = this.employee.city;
       this.form.salary = this.employee.salary;
-    },
+      },
     methods: {
       onSubmit (evt) {
         evt.preventDefault();
-        alert(JSON.stringify(this.form));
+        axios.put('http://localhost/employees/public/api/employees/{employee}',this.form).then(response => {
+          console.log(response)
+        })
+          .catch(error => {
+            console.log(error.response)
+          });
       },
       onReset (evt) {
         evt.preventDefault();
