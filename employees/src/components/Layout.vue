@@ -3,18 +3,19 @@
     <div id="app">
       <h2>Katalog pracowników</h2>
       <NavMenu></NavMenu>
-
+      <alerts></alerts>
       <router-view></router-view>
-
     </div>
   </b-container>
 </template>
 
 <script>
-  import NavMenu from './Navigation'
+  import NavMenu from './Navigation';
+  import Alerts from './Alerts';
     export default {
       name: 'Layout',
       components:{
+        Alerts,
         NavMenu,
       }
     }

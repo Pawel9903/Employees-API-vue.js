@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import {store} from "./store/index";
 import App from './components/Layout'
 import router  from './routes'
 // css files
@@ -23,13 +24,14 @@ Vue.directive('b-modal', bModalDirective);
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
-Vue.use(VueAxios, axios);
+// Vue.use(VueAxios, axios);
 
 //components
 import Employees from './components/Employees'
 
 new Vue({
   el: '#app',
+  store,
   router,
   render: h => h(App),
 });

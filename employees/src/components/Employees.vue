@@ -38,7 +38,7 @@
       </b-col>
       <b-col md="6" class="my-1">
         <b-form-group horizontal label="Na stronie" class="mb-0">
-          <b-form-select :options="pageOptions" v-model="perPage" />
+          <b-form-select :options="pageOptions" v-model="perPage"></b-form-select>
         </b-form-group>
       </b-col>
     </b-row>
@@ -56,7 +56,7 @@
              :sort-direction="sortDirection"
              @filtered="onFiltered"
     >
-      <template slot="name" slot-scope="row">{{row.value.name}} {{row.value.surname}}</template>
+      <template slot="name" slot-scope="row">{{ row.value }}</template>
       <template slot="isActive" slot-scope="row">{{row.value?'Yes :)':'No :('}}</template>
       <template slot="actions" slot-scope="row">
         <!-- We use @click.stop here to prevent a 'row-clicked' event from also happening -->
@@ -78,7 +78,7 @@
 
     <b-row>
       <b-col md="6" class="my-1">
-        <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" class="my-0" />
+        <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" class="my-0"></b-pagination>
       </b-col>
     </b-row>
 
@@ -87,41 +87,16 @@
       <pre>{{ modalInfo.content }}</pre>
     </b-modal>
 
-
   </b-container>
 </template>
 
 <script>
-  import axios from 'axios'
 
-  let items = [
-    { isActive: true, age: 40, name: { first: 'Dickerson', last: 'Macdonald' }, surname: 'test' },
-    { isActive: false, age: 21, name: { first: 'Larsen', last: 'Shaw' } },
-    {
-      isActive: false,
-      age: 9,
-      name: { first: 'Mini', last: 'Navarro' },
-      _rowVariant: 'success'
-    },
-    { isActive: false, age: 89, name: { first: 'Geneva', last: 'Wilson' } },
-    { isActive: true, age: 38, name: { first: 'Jami', last: 'Carney' } },
-    { isActive: false, age: 27, name: { first: 'Essie', last: 'Dunlap' } },
-    { isActive: true, age: 40, name: { first: 'Thor', last: 'Macdonald' } },
-    {
-      isActive: true,
-      age: 87,
-      name: { first: 'Larsen', last: 'Shaw' },
-      _cellVariants: { age: 'danger', isActive: 'warning' }
-    },
-    { isActive: false, age: 26, name: { first: 'Mitzi', last: 'Navarro' } },
-    { isActive: false, age: 22, name: { first: 'Genevieve', last: 'Wilson' } },
-    { isActive: true, age: 38, name: { first: 'John', last: 'Carney' } },
-    { isActive: false, age: 29, name: { first: 'Dick', last: 'Dunlap' } }
-  ];
-
-
+  import  dataSupport  from '../mixins/supportData';
+  let items = [];
   export default {
     name: "Employees",
+    mixins:[ dataSupport ],
     data () {
       return {
         items: items,
@@ -132,7 +107,6 @@
           { key: 'email', label: 'Email', sortable: true, 'class': 'text-center' },
           { key: 'salary', label: 'Zarobki', sortable: true, 'class': 'text-center' },
           { key: 'city', label: 'Miasto', sortable: true, 'class': 'text-center' },
-          { key: 'isActive', label: 'is Active' },
           { key: 'actions', label: 'Actions' }
         ],
         currentPage: 1,
@@ -146,21 +120,21 @@
         modalInfo: { title: '', content: '' }
       }
     },
+    created()
+    {
+      this.$store.dispatch('GET_EMPLOYEE');
+      setTimeout(() => {
+        this.items = this.$store.state.employees;
+      },300)
+    },
     computed: {
       sortOptions () {
+
         // Create an options list from our fields
         return this.fields
           .filter(f => f.sortable)
           .map(f => { return { text: f.label, value: f.key } })
-      }
-    },
-    created() {
-      fetch('http://localhost/employees/public/api/employees')
-            .then(response => {
-            return response.json();
-          }).then(result => {
-            this.items = result;
-      });
+      },
     },
     methods: {
       info (item, index, button) {

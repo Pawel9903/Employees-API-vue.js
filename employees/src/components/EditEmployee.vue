@@ -77,10 +77,12 @@
 </template>
 
 <script>
-  import axios from 'axios';
+
+  import supportData from '../mixins/supportData';
 
   export default {
     name: "EditEmployee",
+    mixins:[ supportData ],
     data () {
       return {
         employee: this.$route.params.employee.item,
@@ -99,34 +101,19 @@
           salary: '',
           city: '',
         },
-        foods: [
-          { text: 'Select One', value: null },
-          'Carrots', 'Beans', 'Tomatoes', 'Corn'
-        ],
         show: true
       }
     },
     mounted(){
-      this.form.email = this.employee.email;
-      this.form.name = this.employee.name;
-      this.form.surname = this.employee.surname;
-      this.form.phone = this.employee.phone;
-      this.form.city = this.employee.city;
-      this.form.salary = this.employee.salary;
+      this.setForm()
       },
     methods: {
       onSubmit (evt) {
         evt.preventDefault();
-        axios.put('http://localhost/employees/public/api/employees/{employee}',this.form).then(response => {
-          console.log(response)
-        })
-          .catch(error => {
-            console.log(error.response)
-          });
+        this.$store.dispatch('UPDATE_EMPLOYEE',this.form);
       },
-      onReset (evt) {
-        evt.preventDefault();
-        /* Reset our form values */
+      setForm()
+      {
         this.form.email = this.employee.email;
         this.form.name = this.employee.name;
         this.form.surname = this.employee.surname;
@@ -134,9 +121,13 @@
         this.form.city = this.employee.city;
         this.form.salary = this.employee.salary;
         this.form.checked = [];
-        /* Trick to reset/clear native browser form validation state */
         this.show = false;
         this.$nextTick(() => { this.show = true });
+      },
+      onReset (evt) {
+        evt.preventDefault();
+        /* Reset our form values */
+        this.setForm()
       }
     }
   }
