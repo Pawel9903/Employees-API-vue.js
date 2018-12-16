@@ -3,8 +3,9 @@
     <div id="app">
       <h2>Katalog pracowników</h2>
       <NavMenu></NavMenu>
+      <confirm-modal :message="modal.modalMessage" :show="modal.showModal"></confirm-modal>
       <alerts :message="alertMessage.message" :variant="alertMessage.variant" show-alert="alertMessage.showAlert" ></alerts>
-      <router-view @alert="alert" ></router-view>
+      <router-view @alert="alert" @confirmModal="confirmModal"></router-view>
     </div>
   </b-container>
 </template>
@@ -12,6 +13,7 @@
 <script>
   import NavMenu from './Navigation';
   import Alerts from './Alerts';
+  import ConfirmModal from './ConfirmModal'
     export default {
       name: 'Layout',
       data(){
@@ -20,25 +22,34 @@
             showAlert : 0,
             message:'',
             variant:''
+          },
+          modal:{
+            showModal:0,
+            modalMessage:''
           }
         }
       },
       components:{
         Alerts,
         NavMenu,
+        ConfirmModal
       },
       methods:{
         alert(value) {
           this.alertMessage.message = value.message;
           this.alertMessage.variant = value.variant;
-          this.alertMessage.showAlert = true;
+          this.alertMessage.showAlert = 1;
 
           setTimeout(()=>{
             this.alertMessage.message = '';
             this.alertMessage.variant = '';
-            this.alertMessage.showAlert = false;
+            this.alertMessage.showAlert = 0;
           },5000)
         },
+        confirmModal(value){
+          this.modal.modalMessage = value.message;
+          this.modal.showModal = 1;
+        }
       }
     }
 

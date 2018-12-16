@@ -79,10 +79,11 @@
 <script>
 
   import alert from '../mixins/alerts';
+  import confirmModal from '../mixins/confirmModal'
 
   export default {
     name: "EditEmployee",
-    mixins:[ alert ],
+    mixins:[ alert, confirmModal ],
     data () {
       return {
         employee: this.$route.params.employee.item,
@@ -109,6 +110,7 @@
       },
     methods: {
       onSubmit (evt) {
+        this.confirmModal('Czy na pewno chcesz edytować pracownika?');
         evt.preventDefault();
         this.$store.dispatch('employees/UPDATE_EMPLOYEE',this.form).then(
             this.alert('Udało się edytować pracownika','success')

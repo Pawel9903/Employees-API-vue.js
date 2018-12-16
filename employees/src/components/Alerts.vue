@@ -17,8 +17,8 @@
     name:'Alerts',
       props: {
         showAlert: {
-          type: Boolean,
-          default: false
+          type: Number,
+          default: 0
         },
         message:{
           type: String,
