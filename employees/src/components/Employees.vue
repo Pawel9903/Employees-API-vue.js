@@ -122,9 +122,9 @@
     },
     created()
     {
-      this.$store.dispatch('GET_EMPLOYEE');
+      this.items = this.$store.dispatch('employees/GET_EMPLOYEE');
       setTimeout(() => {
-        this.items = this.$store.state.employees;
+        this.items = this.$store.getters['employees/EMPLOYEES'];
       },300)
     },
     computed: {

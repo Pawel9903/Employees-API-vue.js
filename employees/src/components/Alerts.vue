@@ -1,39 +1,34 @@
 <template>
   <div>
-
-    <b-alert :show="dismissCountDown"
+    <b-alert :show="showAlert"
              dismissible
              fade
              :variant="variant"
-             @dismissed="dismissCountDown=0">
-      {{ message}}
+    >
+      {{ message }}
     </b-alert>
+    <p v-model="message" ></p>
   </div>
 </template>
 
 <script>
-  import supportData from "../mixins/supportData";
-  import alerts from "../mixins/alerts";
 
   export default {
     name:'Alerts',
-    mixins:[supportData,alerts],
-    data () {
-      return {
-        dismissSecs: 5,
-        dismissCountDown: 0,
-        showDismissibleAlert: false,
-        message:'',
-        variant:''
+      props: {
+        showAlert: {
+          type: Boolean,
+          default: false
+        },
+        message:{
+          type: String,
+          default: ''
+        },
+        variant:{
+          type: String,
+          default: ''
+        }
       }
-    },
-    methods:{
-      showAlert(message, variant) {
-        this.dismissCountDown = 1;
-        this.message = message;
-        this.variant = variant
-      }
-    }
   }
 </script>
 

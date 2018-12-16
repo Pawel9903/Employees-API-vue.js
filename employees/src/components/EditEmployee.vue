@@ -78,11 +78,11 @@
 
 <script>
 
-  import supportData from '../mixins/supportData';
+  import alert from '../mixins/alerts';
 
   export default {
     name: "EditEmployee",
-    mixins:[ supportData ],
+    mixins:[ alert ],
     data () {
       return {
         employee: this.$route.params.employee.item,
@@ -110,7 +110,9 @@
     methods: {
       onSubmit (evt) {
         evt.preventDefault();
-        this.$store.dispatch('UPDATE_EMPLOYEE',this.form);
+        this.$store.dispatch('employees/UPDATE_EMPLOYEE',this.form).then(
+            this.alert('Udało się edytować pracownika','success')
+        );
       },
       setForm()
       {
@@ -127,7 +129,7 @@
       onReset (evt) {
         evt.preventDefault();
         /* Reset our form values */
-        this.setForm()
+        $emit('message1','test');
       }
     }
   }
