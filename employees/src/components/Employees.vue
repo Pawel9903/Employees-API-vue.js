@@ -101,9 +101,8 @@
 </template>
 
 <script>
-
+let items = [];
   import  dataSupport  from '../mixins/supportData';
-  let items = [];
   export default {
     name: "Employees",
     mixins:[ dataSupport ],
@@ -144,10 +143,11 @@
     },
     methods: {
       getEmployees(){
-        this.items = this.$store.dispatch('employees/GET_EMPLOYEES');
+        this.$store.dispatch('employees/GET_EMPLOYEES');
         setTimeout(() => {
           this.items = this.$store.getters['employees/EMPLOYEES'];
         },300)
+
       },
       info (item, index, button) {
         this.modalInfo.title = `Row index: ${index}`;

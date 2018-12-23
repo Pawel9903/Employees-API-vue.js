@@ -10,11 +10,11 @@ import 'va/lib/script'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-Vue.use(BootstrapVue);
-
+import Vuelidate from 'vuelidate'
 import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
-
+Vue.use(BootstrapVue);
+Vue.use(Vuelidate);
 Vue.component('b-modal', bModal);
 Vue.directive('b-modal', bModalDirective);
 
@@ -24,5 +24,3 @@ new Vue({
   router,
   render: h => h(App),
 });
-
-const bus = new Vue();

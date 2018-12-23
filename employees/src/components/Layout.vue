@@ -1,9 +1,8 @@
 <template>
   <b-container>
     <div id="app">
-      <h2>Katalog pracowników</h2>
+      <!--<h2>Katalog pracowników</h2>-->
       <NavMenu></NavMenu>
-      <confirm-modal :message="modal.modalMessage" :show="modal.showModal"></confirm-modal>
       <alerts :message="alertMessage.message" :variant="alertMessage.variant" :show-alert="alertMessage.showAlert" ></alerts>
       <router-view @alert="alert" @confirmModal="confirmModal"></router-view>
     </div>
@@ -13,7 +12,6 @@
 <script>
   import NavMenu from './Navigation';
   import Alerts from './Alerts';
-  import ConfirmModal from './ConfirmModal'
     export default {
       name: 'Layout',
       data(){
@@ -32,7 +30,6 @@
       components:{
         Alerts,
         NavMenu,
-        ConfirmModal
       },
       methods:{
         alert(value) {

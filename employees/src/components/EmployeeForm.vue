@@ -76,8 +76,12 @@
 </template>
 
 <script>
+  import { validationMixin } from "vuelidate"
+  import { required, minLength } from "vuelidate/lib/validators"
+
     export default {
-        name: "EmployeeForm",
+      name: "EmployeeForm",
+      mixins: [validationMixin],
       props:{
           form:{
             name:{
@@ -106,7 +110,35 @@
             }
           },
         onSubmit:Function,
-      },
+      }
+      // validations: {
+      //   form: {
+      //     name:{
+      //       type:String,
+      //       default:''
+      //     },
+      //     surname:{
+      //       type:String,
+      //       default:''
+      //     },
+      //     phone:{
+      //       type:Number,
+      //       default:''
+      //     },
+      //     salary:{
+      //       type:Number,
+      //       default:''
+      //     },
+      //     city:{
+      //       type:String,
+      //       default:''
+      //     },
+      //     email:{
+      //       type:String,
+      //       default:''
+      //     }
+      //   },
+      
     }
 </script>
 
