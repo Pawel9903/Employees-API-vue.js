@@ -24,3 +24,5 @@ new Vue({
   router,
   render: h => h(App),
 });
+
+const bus = new Vue();

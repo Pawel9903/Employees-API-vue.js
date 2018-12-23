@@ -4,7 +4,7 @@
       <h2>Katalog pracowników</h2>
       <NavMenu></NavMenu>
       <confirm-modal :message="modal.modalMessage" :show="modal.showModal"></confirm-modal>
-      <alerts :message="alertMessage.message" :variant="alertMessage.variant" show-alert="alertMessage.showAlert" ></alerts>
+      <alerts :message="alertMessage.message" :variant="alertMessage.variant" :show-alert="alertMessage.showAlert" ></alerts>
       <router-view @alert="alert" @confirmModal="confirmModal"></router-view>
     </div>
   </b-container>

@@ -1,6 +1,10 @@
 <template>
   <b-container fluid>
     <!-- User Interface controls -->
+    <router-link tag="button" size="sm" :to="{name:'addEmployee'}" class="mr-1">
+      Dodaj pracownika
+    </router-link>
+
     <b-row>
       <b-col md="6" class="my-1">
         <b-form-group horizontal label="Wyszukiwarka" class="mb-0">
@@ -60,12 +64,18 @@
       <template slot="isActive" slot-scope="row">{{row.value?'Yes :)':'No :('}}</template>
       <template slot="actions" slot-scope="row">
         <!-- We use @click.stop here to prevent a 'row-clicked' event from also happening -->
-        <router-link tag="button" size="sm" :to="{name:'editEmployees' , id:row.id, params:{ employee:row }}" class="mr-1">
+        <router-link tag="button" size="sm" :to="{name:'editEmployees' , params:{ id:row.item.id }}" class="mr-1">
           Edytuj
         </router-link>
-        <b-button size="sm" @click.stop="row.toggleDetails">
-          {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
+        <router-link tag="button" size="sm" :to="{name:'showEmployee' , params:{ id:row.item.id }}" class="mr-1">
+          Pokaż
+        </router-link>
+        <b-button tag="button" size="sm" @click="deleteEmployee(row.item.id)" class="mr-1">
+          Usuń
         </b-button>
+        <!--<b-button size="sm" @click.stop="row.toggleDetails">-->
+          <!--{{ row.detailsShowing ? 'Hide' : 'Show' }} Details-->
+        <!--</b-button>-->
       </template>
       <template slot="row-details" slot-scope="row">
         <b-card>
@@ -122,14 +132,10 @@
     },
     created()
     {
-      this.items = this.$store.dispatch('employees/GET_EMPLOYEE');
-      setTimeout(() => {
-        this.items = this.$store.getters['employees/EMPLOYEES'];
-      },300)
+      this.getEmployees();
     },
     computed: {
       sortOptions () {
-
         // Create an options list from our fields
         return this.fields
           .filter(f => f.sortable)
@@ -137,6 +143,12 @@
       },
     },
     methods: {
+      getEmployees(){
+        this.items = this.$store.dispatch('employees/GET_EMPLOYEES');
+        setTimeout(() => {
+          this.items = this.$store.getters['employees/EMPLOYEES'];
+        },300)
+      },
       info (item, index, button) {
         this.modalInfo.title = `Row index: ${index}`;
         this.modalInfo.content = JSON.stringify(item, null, 2);
@@ -150,6 +162,10 @@
         // Trigger pagination to update the number of buttons/pages due to filtering
         this.totalRows = filteredItems.length;
         this.currentPage = 1
+      },
+      async deleteEmployee(id) {
+        await this.$store.dispatch('employees/DELETE_EMPLOYEE', id);
+        this.getEmployees()
       }
     }
   }

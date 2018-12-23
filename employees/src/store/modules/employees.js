@@ -12,6 +12,9 @@ export const employees = {
   getters : {
     EMPLOYEES: state => {
       return state.employees;
+    },
+    GET_EMPLOYEE_BY_ID: state => (id) => {
+      return state.employees.find(employee => employee.id === id)
     }
   },
   mutations: {
@@ -24,6 +27,10 @@ export const employees = {
   },
   actions : {
     GET_EMPLOYEE : async (context,payload) => {
+      let { data } = await Axios.get('http://employees.vh/api/employees/'+payload);
+      context.commit('SET_EMPLOYEE',data);
+    },
+    GET_EMPLOYEES : async (context,payload) => {
       let { data } = await Axios.get('http://employees.vh/api/employees');
       context.commit('SET_EMPLOYEE',data);
     },
@@ -34,6 +41,9 @@ export const employees = {
     UPDATE_EMPLOYEE : async (context, payload) => {
       let { data } = await  Axios.put('http://employees.vh/api/employees/{employee}',payload);
       context.commit('ADD_EMPLOYEE',payload);
+    },
+    DELETE_EMPLOYEE : async (context, payload) => {
+      let { data } = await Axios.delete('http://employees.vh/api/employees/'+ payload);
     }
   }
 };
