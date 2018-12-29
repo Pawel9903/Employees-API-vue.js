@@ -18,6 +18,8 @@ Vue.use(Vuelidate);
 Vue.component('b-modal', bModal);
 Vue.directive('b-modal', bModalDirective);
 
+
+
 new Vue({
   el: '#app',
   store,

@@ -1,5 +1,9 @@
 <template>
+  <div>
+    <h4>Edycja pracownika</h4>
   <employee-form :form="employee" :on-submit="onSubmit"></employee-form>
+  </div>
+
 </template>
 
 <script>
@@ -28,7 +32,7 @@
         this.$store.dispatch('employees/GET_EMPLOYEE',id);
         setTimeout(()=>{
           this.employee = this.$store.getters['employees/EMPLOYEES'];
-        },100)
+        },300)
       },
       async onSubmit (evt) {
         evt.preventDefault();

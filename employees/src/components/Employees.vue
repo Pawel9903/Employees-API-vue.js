@@ -1,5 +1,7 @@
 <template>
   <b-container fluid>
+    <h4>Lista pracowników</h4>
+
     <!-- User Interface controls -->
     <router-link tag="button" size="sm" :to="{name:'addEmployee'}" class="mr-1">
       Dodaj pracownika
@@ -146,7 +148,7 @@ let items = [];
         this.$store.dispatch('employees/GET_EMPLOYEES');
         setTimeout(() => {
           this.items = this.$store.getters['employees/EMPLOYEES'];
-        },300)
+        },1000)
 
       },
       info (item, index, button) {

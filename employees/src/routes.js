@@ -6,6 +6,8 @@ import Employees from './components/Employees'
 import EditEmployee from "./components/EmployeeEdit";
 import ShowEmployee from './components/EmployeeShow'
 import AddEmployee from './components/EmployeeAdd'
+import Login from './components/Login'
+import Register from './components/Register'
 
 Vue.use(VueRouter);
 
@@ -37,6 +39,18 @@ Vue.use(VueRouter);
       name: 'addEmployee',
       component: AddEmployee,
       props: true
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login,
+      props: true
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: Register,
+      props: true
     }
   ];
 
@@ -44,6 +58,7 @@ const router = new VueRouter({
   mode: 'history',
   routes,
 });
+
 
 export default router
 

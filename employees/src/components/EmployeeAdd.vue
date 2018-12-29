@@ -1,5 +1,9 @@
 <template>
-    <employee-form :form="employee" :on-submit="onSubmit"></employee-form>
+  <div>
+    <h4>Dodawanie pracownika</h4>
+  <employee-form :form="employee" :on-submit="onSubmit"></employee-form>
+  </div>
+
 </template>
 
 <script>

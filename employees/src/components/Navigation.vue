@@ -10,6 +10,8 @@
       <b-navbar-nav>
         <b-nav-item :to="{name:'index'}">Strona główna</b-nav-item>
         <b-nav-item :to="{name:'employees'}">Lista Pracowników</b-nav-item>
+        <b-nav-item :to="{name:'login'}">Logowanie</b-nav-item>
+        <b-nav-item :to="{name:'register'}">Rejestracja</b-nav-item>
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->

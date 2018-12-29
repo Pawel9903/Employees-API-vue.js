@@ -1,5 +1,7 @@
 <template>
   <div>
+    <h4>Pracownik</h4>
+
     <b-card no-body
             style="max-width: 20rem;"
             img-src="https://placekitten.com/380/200"
@@ -55,7 +57,7 @@
           this.$store.dispatch('employees/GET_EMPLOYEE',id);
           setTimeout(()=>{
             this.employee = this.$store.getters['employees/EMPLOYEES'];
-          },100)
+          },300)
         },
       }
     }
