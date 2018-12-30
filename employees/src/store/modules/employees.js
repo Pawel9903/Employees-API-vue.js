@@ -44,6 +44,7 @@ export const employees = {
       context.commit('ADD_EMPLOYEE',payload);
     },
     DELETE_EMPLOYEE : async (context, payload) => {
+      console.log(Env.ROOT_API+'api/employees/'+ payload);
       let { data } = await Axios.delete(Env.ROOT_API+'api/employees/'+ payload);
     }
   }

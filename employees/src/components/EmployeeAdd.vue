@@ -32,7 +32,8 @@
           onSubmit(evt){
             evt.preventDefault();
             this.$store.dispatch('employees/SAVE_EMPLOYEE', this.employee);
-            this.alert('Udało się dodać pracownika','success');
+            this.alert('Udało się edytować pracownika '+this.employee.name + this.employee.surname,'success');
+            this.$router.push("/employees");
           }
       }
 

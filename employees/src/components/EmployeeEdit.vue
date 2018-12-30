@@ -37,7 +37,8 @@
       async onSubmit (evt) {
         evt.preventDefault();
         await this.$store.dispatch('employees/UPDATE_EMPLOYEE',this.employee);
-            this.alert('Udało się edytować pracownika','success');
+            this.alert('Udało się edytować pracownika '+this.employee.name + this.employee.surname,'success');
+            this.$router.push("/employees");
       },
     }
   }

@@ -8,26 +8,23 @@
     <b-collapse is-nav id="nav_collapse">
 
       <b-navbar-nav>
-        <b-nav-item :to="{name:'index'}">Strona główna</b-nav-item>
-        <b-nav-item :to="{name:'employees'}">Lista Pracowników</b-nav-item>
-        <b-nav-item :to="{name:'login'}">Logowanie</b-nav-item>
-        <b-nav-item :to="{name:'register'}">Rejestracja</b-nav-item>
+        <b-nav-item v-show="isLoggedIn" :to="{name:'index'}">Strona główna</b-nav-item>
+        <b-nav-item v-show="isLoggedIn" :to="{name:'employees'}">Lista Pracowników</b-nav-item>
+        <b-nav-item v-show="!isLoggedIn" :to="{name:'login'}">Logowanie</b-nav-item>
+        <b-nav-item v-show="!isLoggedIn" :to="{name:'register'}">Rejestracja</b-nav-item>
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
+        <!--<b-nav-form>-->
+          <!--&lt;!&ndash;<b-form-input size="sm" class="mr-sm-2" type="text" placeholder="Search"/>&ndash;&gt;-->
+          <!--<b-button v-show="isLoggedIn" @click="logout" size="sm" class="my-2 my-sm-0" type="submit">Wyloguj</b-button>-->
+        <!--</b-nav-form>-->
 
-        <b-nav-form>
-          <!--<b-form-input size="sm" class="mr-sm-2" type="text" placeholder="Search"/>-->
-          <b-button @click="logout" size="sm" class="my-2 my-sm-0" type="submit">Wyloguj</b-button>
-        </b-nav-form>
-
-        <!--<b-nav-item-dropdown text="Lang" right>-->
-          <!--<b-dropdown-item href="#">EN</b-dropdown-item>-->
-          <!--<b-dropdown-item href="#">ES</b-dropdown-item>-->
-          <!--<b-dropdown-item href="#">RU</b-dropdown-item>-->
-          <!--<b-dropdown-item href="#">FA</b-dropdown-item>-->
-        <!--</b-nav-item-dropdown>-->
+        <b-nav-item-dropdown v-show="isLoggedIn" text="Użytkownik" right>
+          <b-nav-item class="c-list-nav" :to="{name:'register'}">Profil</b-nav-item>
+          <b-nav-item class="c-list-nav" @click="logout" >Wyloguj</b-nav-item>
+        </b-nav-item-dropdown>
 
         <!--<b-nav-item-dropdown right>-->
           <!--&lt;!&ndash; Using button-content slot &ndash;&gt;-->
@@ -46,7 +43,9 @@
 </template>
 
 <script>
-    export default {
+
+
+  export default {
         name: "Navigation",
       methods:{
           logout(evt) {
@@ -58,10 +57,16 @@
         isLoggedIn() {
           return this.$store.getters['auth/isLoggedIn'];
         }
+      },
+      watch:{
+        isLoggedIn () {
+        }
       }
     }
 </script>
 
 <style scoped>
-
+  .c-list-nav a{
+    color: black !important;
+  }
 </style>

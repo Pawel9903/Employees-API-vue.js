@@ -32,7 +32,10 @@
 </template>
 
 <script>
+  import alert from '../mixins/alerts';
+
   export default {
+    mixins:[ alert ],
     data () {
       return {
         user: {
@@ -49,6 +52,9 @@
               if(this.$store.getters['auth/isLoggedIn']) {
                 this.$store.commit('user/SET_USER', this.user);
                 this.$router.push("/home");
+                this.alert('Witaj, '+this.user.email+'!','success');
+              }else{
+                this.alert('Nieprawidłowy email lub hasło!','danger');
               }
             }, 300)
         })

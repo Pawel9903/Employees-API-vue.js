@@ -33,14 +33,19 @@ export const auth = {
   },
     actions: {
       async login( context,payload) {
-        console.log(Env.ROOT_API+'auth/login')
-        context.commit(LOGIN); // show spinner
+        try{
+          context.commit(LOGIN); // show spinner
           let {data} = await Axios.post(Env.ROOT_API+'auth/login', payload);
-          let timeout = setTimeout(() => {
-            localStorage.setItem('token', data.token);
-            Axios.defaults.headers.common['Authorization'] = 'Bearer ' + data.token;
-            context.commit(LOGIN_SUCCESS);
-          }, 300);
+          if(data)
+            setTimeout(() => {
+              localStorage.setItem('token', data.token);
+              Axios.defaults.headers.common['Authorization'] = 'Bearer ' + data.token;
+              context.commit(LOGIN_SUCCESS);
+            }, 300);
+        }catch (e) {
+
+        }
+        
       },
       logout({ commit }) {
         localStorage.removeItem("token");

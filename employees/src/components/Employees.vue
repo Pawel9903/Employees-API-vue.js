@@ -145,10 +145,9 @@ let items = [];
     },
     methods: {
       getEmployees(){
-        this.$store.dispatch('employees/GET_EMPLOYEES');
-        setTimeout(() => {
+        this.$store.dispatch('employees/GET_EMPLOYEES').then(() => {
           this.items = this.$store.getters['employees/EMPLOYEES'];
-        },1000)
+        });
 
       },
       info (item, index, button) {

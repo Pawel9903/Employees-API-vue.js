@@ -41,7 +41,7 @@
             this.alertMessage.message = '';
             this.alertMessage.variant = '';
             this.alertMessage.showAlert = 0;
-          },5000)
+          },7000)
         },
         confirmModal(value){
           this.modal.modalMessage = value.message;

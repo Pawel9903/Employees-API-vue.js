@@ -62,7 +62,7 @@
     <b-form-group id="exampleInputGroup1"
                   label="Email:"
                   label-for="exampleInput1"
-                  description="We'll never share your email with anyone else.">
+                  description="">
       <b-form-input id="exampleInput1"
                     type="email"
                     v-model="form.email"
