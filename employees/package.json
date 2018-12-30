@@ -18,6 +18,7 @@
     "vee-validate": "^2.1.4",
     "vue": "^2.5.11",
     "vue-axios": "latest",
+    "vue-resource": "^1.5.1",
     "vue-router": "latest",
     "vue2-admin-lte": "^0.4.3",
     "vuelidate": "^0.7.4",

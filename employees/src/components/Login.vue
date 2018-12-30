@@ -37,16 +37,21 @@
       return {
         user: {
           email: '',
-          name: '',
           password: '',
-          checked: []
         },
       }
     },
     methods: {
       onSubmit (evt) {
         evt.preventDefault();
-        this.$store.dispatch('user/LOGIN', this.user);
+        this.$store.dispatch('auth/login', this.user).then(()  => {
+          setTimeout(() => {
+              if(this.$store.getters['auth/isLoggedIn']) {
+                this.$store.commit('user/SET_USER', this.user);
+                this.$router.push("/home");
+              }
+            }, 300)
+        })
       },
     }
   }

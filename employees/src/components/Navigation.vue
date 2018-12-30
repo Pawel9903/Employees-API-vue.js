@@ -51,8 +51,13 @@
       methods:{
           logout(evt) {
             evt.preventDefault();
-            localStorage.removeItem('token')
+            this.$store.dispatch('auth/logout');
           }
+      },
+      computed: {
+        isLoggedIn() {
+          return this.$store.getters['auth/isLoggedIn'];
+        }
       }
     }
 </script>

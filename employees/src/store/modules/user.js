@@ -8,14 +8,18 @@ export const user = {
   namespaced: true,
   state: {
     user,
-    token: localStorage.getItem('token') || '',
   },
-  mutations: {},
+  mutations: {
+    SET_USER(state, payload) {
+      state.user = payload;
+    }
+  },
   getters: {},
   actions: {
-    LOGIN: async (context, payload) => {
-      let {data} = await Axios.post('http://employees.vh/api/auth/login', payload);
-      localStorage.setItem('token', data.token);
-    }
+
+    // LOGIN: async (context, payload) => {
+    //   let {data} = await Axios.post('http://employees.vh/api/auth/login', payload);
+    //   localStorage.setItem('token', data.token);
+    // }
   }
 }
