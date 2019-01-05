@@ -47,6 +47,19 @@ export const auth = {
         }
         
       },
+      async register(context, payload){
+        try{
+          let {data} = await Axios.post(Env.ROOT_API+'auth/register', payload).then(()=>{
+            if(data.status === "success"){
+              return true;
+            }else {
+              return false;
+            }
+        })
+        }catch (e) {
+
+        }
+      },
       logout({ commit }) {
         localStorage.removeItem("token");
         commit(LOGOUT);

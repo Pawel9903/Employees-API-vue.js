@@ -3,13 +3,24 @@
     <h4>Rejestracja</h4>
 
     <b-form @submit="onSubmit">
+      <b-form-group id="exampleInputGroup0"
+                    label="Imię:"
+                    label-for="exampleInput0"
+      >
+        <b-form-input id="exampleInput0"
+                      type="text"
+                      v-model="user.name"
+                      required
+                      placeholder="Imię">
+        </b-form-input>
+      </b-form-group>
       <b-form-group id="exampleInputGroup1"
                     label="Email:"
                     label-for="exampleInput1"
       >
         <b-form-input id="exampleInput1"
                       type="email"
-                      v-model="form.email"
+                      v-model="user.email"
                       required
                       placeholder="Email">
         </b-form-input>
@@ -19,7 +30,7 @@
                     label-for="exampleInput2">
         <b-form-input id="exampleInput2"
                       type="password"
-                      v-model="form.password"
+                      v-model="user.password"
                       required
                       placeholder="Hasło">
         </b-form-input>
@@ -29,35 +40,44 @@
                     label-for="exampleInput3">
         <b-form-input id="exampleInput3"
                       type="password"
-                      v-model="form.confirmPassword"
+                      v-model="user.confirmPassword"
                       required
                       placeholder="Powtórz hasło">
         </b-form-input>
       </b-form-group>
       <b-form-group id="exampleGroup4">
       </b-form-group>
-      <b-button type="submit" variant="primary">Zaloguj</b-button>
+      <b-button type="submit" variant="primary">Zarejestruj</b-button>
     </b-form>
   </div>
 </template>
 
 <script>
+
+  import alert from '../mixins/alerts'
+
   export default {
+    mixins:[alert],
     data () {
       return {
-        form: {
+        user: {
+          name:'',
           email: '',
-          name: '',
           password: '',
           confirmPassword: '',
-          checked: []
         },
       }
     },
     methods: {
       onSubmit (evt) {
         evt.preventDefault();
-        alert(JSON.stringify(this.form));
+          let status = this.$store.dispatch('auth/register', this.user);
+            if(status) {
+              this.$router.push('/login');
+              this.alert('Udało się dodać użytkownika '+this.user.name+' !','success');
+            }else {
+              this.alert('Nie udało się dodać użytkownika!','danger');
+            }
       },
     }
   }

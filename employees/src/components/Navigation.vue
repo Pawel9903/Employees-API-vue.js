@@ -43,14 +43,17 @@
 </template>
 
 <script>
-
+  import alert from '../mixins/alerts';
 
   export default {
         name: "Navigation",
+      mixins:[alert],
       methods:{
           logout(evt) {
             evt.preventDefault();
             this.$store.dispatch('auth/logout');
+            this.$router.push("/login");
+            this.alert('Zostałeś wylogowany','success');
           }
       },
       computed: {
