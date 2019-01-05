@@ -69,8 +69,13 @@
                     required
                     placeholder="Email"></b-form-input>
     </b-form-group>
-
-    <b-button type="submit" variant="primary">Submit</b-button>
+    <!--<div>-->
+      <!--&lt;!&ndash; Plain mode &ndash;&gt;-->
+      <!--<b-form-file type="file" id="file" ref="file" v-model="form.file" class="mt-3" plain></b-form-file>-->
+      <!--<div class="mt-3">Selected file: {{form.file && form.fileName}}</div>-->
+    <!--</div>-->
+    <!--<br>-->
+    <b-button type="submit" variant="primary">Zapisz</b-button>
   </b-form>
   </div>
 </template>
@@ -82,8 +87,17 @@
     export default {
       name: "EmployeeForm",
       mixins: [validationMixin],
+      methods:{
+        // handleFileUpload(){
+        //   this.form.file = this.$refs.file.files[0];
+        // }
+      },
       props:{
           form:{
+            file:{
+            },
+            fileName:{
+            },
             name:{
               type:String,
               default:''

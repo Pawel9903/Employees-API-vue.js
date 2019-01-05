@@ -23,13 +23,16 @@
             city:'',
             salary:'',
             email:'',
-            phone:''
+            phone:'',
+            file:'',
+            fileName:'',
           }
         }
       },
       mixins:[alert],
       methods:{
           onSubmit(evt){
+            console.log(this.employee);
             evt.preventDefault();
             this.$store.dispatch('employees/SAVE_EMPLOYEE', this.employee);
             this.alert('Udało się edytować pracownika '+this.employee.name + this.employee.surname,'success');

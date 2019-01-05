@@ -2,11 +2,7 @@
   <div>
     <h4>Pracownik</h4>
 
-    <b-card no-body
-            style="max-width: 20rem;"
-            img-src="https://placekitten.com/380/200"
-            img-alt="Image"
-            img-top>
+    <b-card >
       <h4 slot="header">{{employee.name+' '+employee.surname}}</h4>
 
       <b-list-group flush>
@@ -15,16 +11,16 @@
         <b-list-group-item>Miasto: {{ employee.city }}</b-list-group-item>
         <b-list-group-item>Zarobki: {{ employee.salary }}zł</b-list-group-item>
       </b-list-group>
-      <b-card-body>
-        <a href="#"
-           class="card-link">Card link</a>
-        <a href="#"
-           class="card-link">Another link</a>
-      </b-card-body>
-      <b-card-footer>This is a footer</b-card-footer>
-      <b-card-img src="https://placekitten.com/480/210"
-                  alt="Image"
-                  bottom></b-card-img>
+      <!--<b-card-body>-->
+        <!--<a href="#"-->
+           <!--class="card-link">Card link</a>-->
+        <!--<a href="#"-->
+           <!--class="card-link">Another link</a>-->
+      <!--</b-card-body>-->
+      <!--<b-card-footer>This is a footer</b-card-footer>-->
+      <!--<b-card-img src="https://placekitten.com/480/210"-->
+                  <!--alt="Image"-->
+                  <!--bottom></b-card-img>-->
     </b-card>
   </div>
 
